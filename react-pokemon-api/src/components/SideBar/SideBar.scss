@@ -1,0 +1,23 @@
+@import "../../scss/mixins";
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+  box-shadow: var(--box-shadow);
+  height: max-content;
+
+  @include respond(tab-port) {
+    background: transparent;
+    box-shadow: none;
+    flex-direction: row;
+    justify-content: center;
+    height: 7rem;
+  }
+
+  @include respond(phone) {
+    flex-direction: column;
+    align-items: center;
+    height: max-content;
+  }
+}

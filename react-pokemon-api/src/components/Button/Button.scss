@@ -1,0 +1,21 @@
+.btn {
+  cursor: pointer;
+  color: var(--color-background);
+  background-color: var(--color-text);
+  border: none;
+  border-radius: 2px;
+  padding: 1rem;
+
+  &--success {
+    background-color: var(--color-success);
+  }
+
+  &--dismiss {
+    background-color: var(--color-dismiss);
+  }
+
+  &--disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

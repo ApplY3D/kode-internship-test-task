@@ -1,0 +1,128 @@
+@import "../../scss/mixins";
+
+.single-card {
+  background-color: var(--color-background);
+  width: 100%;
+  min-height: max-content;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: var(--box-shadow);
+  &__info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    @include respond(phone) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__about-information {
+    margin: 2rem;
+    max-width: 40%;
+
+    h1,
+    h2,
+    h3 {
+      padding: 0.5rem;
+    }
+
+    @include respond(tab-port) {
+      max-width: 45%;
+    }
+
+    @include respond(phone) {
+      max-width: unset;
+    }
+  }
+
+  &__description {
+    margin: 1rem;
+    padding: 1rem;
+    width: 90%;
+  }
+
+  &__img-container {
+    max-width: 40%;
+    img {
+      width: 100%;
+    }
+
+    @include respond(tab-port) {
+      max-width: 50%;
+    }
+
+    @include respond(phone) {
+      max-width: unset;
+    }
+  }
+
+  &__evolves {
+    padding: 0.5rem;
+  }
+
+  &__attacks {
+    padding: 1rem;
+    background-color: var(--color-selected);
+  }
+
+  .attack {
+    padding: 1rem;
+    background-color: var(--color-background);
+
+    &__cost {
+      font-weight: bold;
+      margin-left: 2rem;
+    }
+
+    &__text {
+      position: relative;
+      margin-top: 1rem;
+      &::before {
+        content: "\201C";
+        position: absolute;
+        left: -3rem;
+        font-size: 10rem;
+        top: -3rem;
+        color: var(--color-border);
+        transform: rotate(-4deg);
+      }
+    }
+
+    &:not(:first-of-type) {
+      margin-top: 2rem;
+    }
+  }
+
+  &__resistances {
+    padding: 1rem;
+    background-color: var(--color-selected);
+    .resistance {
+      padding: 1rem;
+      background-color: var(--color-background);
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  @include respond(tab-port) {
+    padding: 1rem;
+  }
+
+  @include respond(phone) {
+    padding: 2rem;
+    flex-direction: column;
+    align-items: center;
+
+    h1,
+    h2,
+    h3 {
+      text-align: center;
+    }
+  }
+}

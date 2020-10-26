@@ -1,0 +1,22 @@
+@import "../../scss/mixins";
+
+.main {
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 1rem;
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    height: 100%;
+    > div:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+
+    @include respond(tab-port) {
+      flex-direction: column;
+    }
+  }
+}

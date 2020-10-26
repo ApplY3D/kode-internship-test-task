@@ -1,0 +1,28 @@
+@import "../../scss/mixins";
+
+.pagination {
+  background-color: var(--color-background);
+  padding: 1rem;
+  align-items: center;
+  justify-content: space-evenly;
+  display: flex;
+  box-shadow: var(--box-shadow);
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  border-radius: 10rem;
+  min-width: 90%;
+  &__page-nums {
+    *:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+  }
+
+  @include respond(phone) {
+    width: 100%;
+    padding: 0.9rem;
+    .btn--next,
+    .btn--prev {
+      display: none;
+    }
+  }
+}
