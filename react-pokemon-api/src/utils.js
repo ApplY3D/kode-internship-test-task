@@ -10,7 +10,8 @@ export const validateLogin = async (email, password) => {
 
 export const validate2FA = async (num) => {
   await delay(500);
-  return num?.toString().length === 6 && typeof num === "number"
+  return num?.toString().length === 6 &&
+    num?.toString() === parseInt(num).toString()
     ? { success: true, token: Date.now() + 7 * 24 * 60 * 60 * 1000 }
     : { success: false, error: "Enter any six digits" };
 };
