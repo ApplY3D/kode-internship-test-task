@@ -8,6 +8,7 @@ export const Input = ({
   type = "text",
   onChange: onChangeCb,
   onSubmit: onSubmitCb,
+  ...props
 }) => {
   const onChangeHandler = (e) => {
     if (onChangeCb) {
@@ -34,6 +35,7 @@ export const Input = ({
         value={value}
         onChange={onChangeHandler}
         type={type}
+        {...props}
       ></input>
     </div>
   );

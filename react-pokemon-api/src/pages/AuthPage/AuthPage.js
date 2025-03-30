@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Input } from "../../components/Input/";
 import { Button } from "../../components/Button";
@@ -20,7 +20,8 @@ export const AuthPage = () => {
     setTimeout(() => setAnimation(false), 500);
   };
 
-  const loginHandler = async () => {
+  const loginHandler = async (e) => {
+    e.preventDefault();
     setError("");
     setShowHiddenElements(true);
     const result = await login(email, password);
@@ -33,7 +34,8 @@ export const AuthPage = () => {
     }
   };
 
-  const login2FAHandler = async () => {
+  const login2FAHandler = async (e) => {
+    e.preventDefault();
     setError("");
     const result = await login2FA(secondFA);
     if (!result.success) {
@@ -49,53 +51,60 @@ export const AuthPage = () => {
     setShowHiddenElements(false);
   };
 
+  useEffect(() => !animation && requestAnimationFrame(() => document.querySelector('[data-autofocus]')?.focus()), [animation, error])
+
   return (
     <div className={`auth ${tempUserData ? "auth-2fa" : ""}`}>
       {(!tempUserData || animation || showHiddenElements) && (
-        <div className="auth__wrapper auth__wrapper--login">
+         <form className="auth__wrapper auth__wrapper--login" inert={animation} aria-hidden={animation} onSubmit={loginHandler}>
           <div className="auth__inputs">
             <>
               <Input
+                required
+                data-autofocus
                 disabled={userLoading}
                 title="Email"
                 value={email}
+                type="email"
                 onChange={setEmail}
-                onSubmit={loginHandler}
               />
               <Input
+                required
                 disabled={userLoading}
                 title="Password"
                 value={password}
                 type="password"
                 onChange={setPassword}
-                onSubmit={loginHandler}
               />
             </>
           </div>
-          <div className="auth__error">{error ? error : ""}</div>
+          <div className="auth__error" aria-live="polite">{error ? error : ""}</div>
           <div className="auth__tools">
             <Button
               disabled={userLoading}
               className="btn--success"
               title="Submit"
-              onClick={loginHandler}
+              type="submit"
             />
           </div>
-        </div>
+        </form>
       )}
 
       {(tempUserData || animation || showHiddenElements) && (
-        <div className="auth__wrapper auth__wrapper--2fa">
+        <form className="auth__wrapper auth__wrapper--2fa" inert={animation} aria-hidden={animation} onSubmit={login2FAHandler}>
           <div className="auth__inputs">
             <Input
+              required
+              data-autofocus
+              minLength={6}
+              maxLength={6}
               disabled={userLoading}
               title="2FA Code"
               value={secondFA}
               onChange={setSecondFA}
-              onSubmit={login2FAHandler}
             />
           </div>
-          <div className="auth__error">{error ? error : ""}</div>
+          <div className="auth__error" aria-live="polite">{error ? error : ""}</div>
           <div className="auth__tools">
             <Button
               disabled={userLoading}
@@ -107,10 +116,10 @@ export const AuthPage = () => {
               disabled={userLoading}
               className="btn--success"
               title="Submit"
-              onClick={login2FAHandler}
+              type="submit"
             />
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

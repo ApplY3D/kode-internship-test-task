@@ -6,6 +6,7 @@ export const Button = ({
   title,
   className = "",
   disabled,
+  type = "button",
   onClick: onClickCb,
 }) => {
   const { userLoading } = useContext(AuthContext);
@@ -14,6 +15,7 @@ export const Button = ({
       disabled={userLoading || disabled}
       className={`btn ${className} ${disabled ? "btn--disabled" : ""}`}
       onClick={onClickCb}
+      type={type}
     >
       {title}
     </button>
